@@ -16,7 +16,7 @@ cmApp.config(['$routeProvider',
         controller: 'DropJoinCtrl'
       }).
       when('/order/:building/:restaurant/:datetime', {
-        templateUrl: 'partials/order.html',
+        templateUrl: 'partials/drop-order.html',
         controller: 'OrderCtrl'
       }).
       when('/confirmation/:id', {
