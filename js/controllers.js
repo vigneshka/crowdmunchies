@@ -4,20 +4,56 @@ cmControllers.controller('DropListCtrl', ['$scope', '$firebase',
 	function ($scope, $firebase) {
 		var ref = new Firebase("https://crowdwhat.firebaseio.com");
 		$scope.drops = $firebase(ref).$asArray();
+		$scope.numOrders = function(drop) {
+			return (Object.keys(drop.order).length).toString();
+		}
+		$scope.dropDisc = function(drop) {
+			var numOrders = Object.keys(drop.order).length;
+			if (numOrders < 2)
+			{
+				return "None";
+			}
+			else if (numOrders>=2 && numOrders<5)
+			{
+				return "5% Discount!";
+			}
+			else if (numOrders>=5 && numOrders<10)
+			{
+				return "10% Discount!";
+			}	
+			else
+			{
+				return "20% Discount!";
+			}
+
+		}
+		$scope.dropGoal = function(drop) {
+			var numOrders = Object.keys(drop.order).length;
+			if (numOrders < 2)
+			{
+				return (2 - numOrders).toString() + " from 5% Discount!";
+			}
+			else if (numOrders>=2 && numOrders<5)
+			{
+				return (5 - numOrders).toString() + " from 10% Discount!";
+			}
+			else if (numOrders>=5 && numOrders<10)
+			{
+				return (10 - numOrders).toString() + " from 20% Discount!";
+			}	
+			else
+			{
+				return "";
+			}
+
+		}
 	}]);
 
 cmControllers.controller('OrderCtrl', ['$scope',
 	function ($scope) {
 
 		var init = function() {
-			$scope.invoice = {
-		        items: [{
-		            qty: 10,
-		            description: 'item',
-		            cost: 9.95
-		        }]
-		    };	
-
+			$scope.invoice = {};
 		};
 
 		$scope.menu = [
@@ -41,16 +77,26 @@ cmControllers.controller('OrderCtrl', ['$scope',
 		];
 		
 		$scope.addItem = function(item){
-			$scope.invoice.items.push(
-			{
-				name: item.sandwich,
-				qty: 1,
-				cost: item.price
-			});
+			var fieldName = item.number.toString();
+			if ($scope.invoice[fieldName] === undefined){
+				$scope.invoice[fieldName] =
+				{
+					number: item.number,
+					name: item.sandwich,
+					qty: 1,
+					cost: item.price
+				};	
+			}
+			else{
+				$scope.invoice[fieldName].qty += 1;
+			}
+			
 		};
 
-		$scope.removeItem = function(index) {
-        	$scope.invoice.items.splice(index, 1);
+		$scope.removeItem = function(item) {
+			var fieldName = item.number.toString();
+
+        	delete $scope.invoice[fieldName];
     	};
 
 		init();
@@ -58,7 +104,7 @@ cmControllers.controller('OrderCtrl', ['$scope',
 
 		$scope.total = function() {
 	        var total = 0;
-	        angular.forEach($scope.invoice.items, function(item) {
+	        angular.forEach($scope.invoice, function(item) {
 	            total += item.qty * item.cost;
 	        })
 

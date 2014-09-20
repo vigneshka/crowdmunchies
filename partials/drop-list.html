@@ -1,10 +1,17 @@
 <div class="row">
+  <div class="row">
+      <div class="col-md-3">Time</div>
+      <div class="col-md-3">Current Discount</div>
+      <div class="col-md-3">Next Goal</div>
+      <div class="col-md-3">some link</div>
+    </div>
   <div ng-repeat="drop in drops">
     <h3>{{drop.loc}}</h3>
     <div class="row">
-      <div class="col-md-4">{{drop.time}}</div>
-      <div class="col-md-4">{{drop.order.length}}</div>
-      <div class="col-md-4">some link</div>
+      <div class="col-md-3">{{drop.time}}</div>
+      <div class="col-md-3">{{dropDisc(drop)}}</div>
+      <div class="col-md-3">{{dropGoal(drop)}}</div>
+      <div class="col-md-3">some link</div>
     </div>
   </div>
 </div>
