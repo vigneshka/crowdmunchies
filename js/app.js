@@ -1,9 +1,9 @@
-var cmApp = angular.module('cmApp', ['ngRoute', 'cmControllers']);
+var cmApp = angular.module('cmApp', ['ngRoute', 'cmControllers', 'firebase']);
 
 cmApp.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
-      when('/drops', {
+      when('/', {
         templateUrl: 'partials/drop-list.html',
         controller: 'DropListCtrl'
       }).
@@ -24,6 +24,6 @@ cmApp.config(['$routeProvider',
         controller: ''
       }).
       otherwise({
-        redirectTo: '/drops'
+        redirectTo: '/'
       });
   }]);

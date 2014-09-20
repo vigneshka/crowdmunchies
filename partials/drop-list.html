@@ -1,7 +1,18 @@
-<div class="row">
-  <ul>
-    <li ng-repeat="drop in drops">
-      {{drop.location}}
-    </li>
-  </ul>
+<div class="container">
+
+      <div class="page-header">
+        <h1>Crowd Munchies</h1>
+        <p class="lead">Order together. Save together.</p>
+      </div>
+
+      <div ng-repeat="drop in drops">
+        <h3>{{drop.loc}}</h3>
+        <div class="row">
+          <div class="col-md-4">{{drop.time}}</div>
+          <div class="col-md-4">{{drop.order.length}}</div>
+          <div class="col-md-4">some link</div>
+        </div>
+      </div>
+
+
 </div>
