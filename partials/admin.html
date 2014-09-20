@@ -1,0 +1,15 @@
+<div class="row">
+  <div class="row">
+      <div class="col-md-3">Time</div>
+      <div class="col-md-3">Current Discount</div>
+      <div class="col-md-3">Next Goal</div>
+      <div class="col-md-3">some link</div>
+    </div>
+  <div ng-repeat="drop in drops">
+    <h2>Time: {{drop.time}}</h2>
+    <h3>Location: {{drop.loc}}</h3>
+    <div> {{orderParse(drop)}} </div>
+    </div>
+  </div>
+
+</div>
