@@ -7,13 +7,21 @@ cmApp.config(['$routeProvider',
         templateUrl: 'partials/drop-list.html',
         controller: 'DropListCtrl'
       }).
-      when('/drops/:dropId', {
-        templateUrl: 'partials/drop-detail.html',
+      when('/status/:building/:restaurant/:datetime', {
+        templateUrl: 'partials/drop-status.html',
         controller: 'DropDetailCtrl'
       }).
-      when('/join/:dropId', {
+      when('/join/:building/:restaurant/:datetime', {
       	templateUrl: 'partials/drop-join.html',
         controller: 'DropJoinCtrl'
+      }).
+      when('/order/:building/:restaurant/:datetime', {
+        templateUrl: 'partials/order.html',
+        controller: 'OrderCtrl'
+      }).
+      when('/confirmation/:id', {
+        templateUrl: 'partials/confirmation.html',
+        controller: ''
       }).
       otherwise({
         redirectTo: '/drops'
