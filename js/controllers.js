@@ -80,6 +80,8 @@ cmControllers.controller('AdminCtrl', ['$scope', '$firebase',
 		$scope.orderParse = function(drop) {
 			var invoice = {};
 			invoice.items = {};
+			$scope.total = 0;
+			invoice.total = 0;
 			invoice.orderCount = Object.keys(drop.order).length;
 			angular.forEach(drop.order, function(order) {
 	            var splitArray = order.split(";");
@@ -110,8 +112,34 @@ cmControllers.controller('AdminCtrl', ['$scope', '$firebase',
 
 	        })
 
+	        angular.forEach(invoice.items, function(item) {
+	            invoice.total += item.qty * item.cost;
+	        })
+	        $scope.total = invoice.total;
 	        return invoice;
 		};
+
+		$scope.discount = function(drop) {
+			var numOrders = Object.keys(drop.order).length;
+			if (numOrders < 2)
+			{
+				return 0;
+			}
+			else if (numOrders>=2 && numOrders<5)
+			{
+				return 0.05;
+			}
+			else if (numOrders>=5 && numOrders<10)
+			{
+				return 0.10;
+			}	
+			else
+			{
+				return 0.20;
+			}
+
+		}
+
 
 
 	}]);

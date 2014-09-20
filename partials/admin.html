@@ -1,9 +1,17 @@
 <div class="row">
   
   <div ng-repeat="drop in drops">
+    <h3>Location: {{drop.loc}}</h3>
+        <h4>Time: {{drop.time}}</h4>
     <table class="table">
+       <tr>
+        <th>Item</th>
+        <th>Qty</th>
+        <th>Price</th>
+        <th>Sub-Total</th>
+       </tr>
       <tr ng-repeat="item in orderParse(drop).items">
-        
+
         <td class="col-md-5">
           # {{item.number}} {{item.name}}
         </td>
@@ -21,12 +29,29 @@
         <tr>
           <td></td>
           <td></td>
-          <td>Total:</td>
-          <td>{{dropTotal(drop)}}</td>
+          <td><b>Total:</b></td>
+          <td>{{total | currency}}</td>
+
+        </tr>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td><b>Discount:</b></td>
+          <td>{{discount(drop)*100}}%</td>
+
+        </tr>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td><b>Grand Total:</b></td>
+          <td>{{total*(1-discount(drop)) | currency}}</td>
 
         </tr>
 
     </table>
+    <br>
     
   </div>
 
