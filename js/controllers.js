@@ -55,6 +55,7 @@ cmControllers.controller('AdminCtrl', ['$scope', '$firebase',
 		
 		var ref = new Firebase("https://crowdwhat.firebaseio.com");
 		$scope.drops = $firebase(ref).$asArray();
+
 		$scope.numOrders = function(drop) {
 			return (Object.keys(drop.order).length).toString();
 		};
@@ -143,8 +144,10 @@ cmControllers.controller('AdminCtrl', ['$scope', '$firebase',
 
 
 	}]);
-cmControllers.controller('OrderCtrl', ['$scope',
-	function ($scope) {
+cmControllers.controller('OrderCtrl', ['$scope', '$routeParams', "$firebase", "$location",
+	function ($scope, $routeParams, $firebase, $location) {
+
+		var ref = new Firebase("https://crowdwhat.firebaseio.com");
 
 		var init = function() {
 			$scope.invoice = {};
@@ -203,6 +206,29 @@ cmControllers.controller('OrderCtrl', ['$scope',
 	        })
 
 	        return total;
+	    };
+
+	    $scope.checkout = function(invoice) {
+	    	
+	    	var data = "";
+	    	angular.forEach(invoice, function(item) {
+	            data = data + item.number.toString() + "," + item.qty.toString() + ";";
+	        })
+
+	    	var randNum = Math.floor((Math.random() * 1000) + 1);
+	    	var randString = randNum.toString();
+
+	    	var building = ($routeParams.building).toString();
+	    	var datetime = ($routeParams.datetime).toString();
+	    	var buildingdate = building+datetime;
+
+	    	var path = "#/confirmation/"+ building + "/" + datetime + "/" + randString;
+
+	    	$location.path( path );
+	    	
+
+	
+
 	    };
 
 	}]);
