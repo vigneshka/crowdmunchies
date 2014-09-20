@@ -79,6 +79,8 @@ cmControllers.controller('AdminCtrl', ['$scope', '$firebase',
 		];
 		$scope.orderParse = function(drop) {
 			var invoice = {};
+			invoice.items = {};
+			invoice.orderCount = Object.keys(drop.order).length;
 			angular.forEach(drop.order, function(order) {
 	            var splitArray = order.split(";");
 	            for ( i=0; i<splitArray.length; i++) {
@@ -89,17 +91,17 @@ cmControllers.controller('AdminCtrl', ['$scope', '$firebase',
 	            	//check that the value is valid
 	            	if (num > 0){
 	            		var index = num -1;
-	            		if (invoice[num] === undefined){
-							invoice[num] =
+	            		if (invoice.items[num] === undefined){
+							invoice.items[num] =
 							{
 								number: num,
-								name: num.toString(),
+								name: $scope.menu[index].sandwich,
 								qty: qty,
-								cost: 1
+								cost: $scope.menu[index].price
 							};	
 						}
 						else{
-							invoice[num].qty += qty;
+							invoice.items[num].qty += qty;
 						}
 
 	            	}

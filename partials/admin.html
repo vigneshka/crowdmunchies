@@ -1,15 +1,33 @@
 <div class="row">
-  <div class="row">
-      <div class="col-md-3">Time</div>
-      <div class="col-md-3">Current Discount</div>
-      <div class="col-md-3">Next Goal</div>
-      <div class="col-md-3">some link</div>
-    </div>
+  
   <div ng-repeat="drop in drops">
-    <h2>Time: {{drop.time}}</h2>
-    <h3>Location: {{drop.loc}}</h3>
-    <div> {{orderParse(drop)}} </div>
-    </div>
+    <table class="table">
+      <tr ng-repeat="item in orderParse(drop).items">
+        
+        <td class="col-md-5">
+          # {{item.number}} {{item.name}}
+        </td>
+        <td class="col-md-2">
+          {{item.qty}}
+        </td>
+        <td class="col-md-2">
+          {{item.cost}}
+        </td>
+        <td class="col-md-3">
+          {{item.cost * item.qty | currency}}
+        </td>
+
+      </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td>Total:</td>
+          <td>{{dropTotal(drop)}}</td>
+
+        </tr>
+
+    </table>
+    
   </div>
 
 </div>
