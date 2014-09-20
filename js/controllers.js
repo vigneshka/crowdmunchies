@@ -13,4 +13,8 @@ cmControllers.controller('DropListCtrl', ['$scope',
 cmControllers.controller('DropDetailCtrl', ['$scope', '$routeParams',
 	function($scope, $routeParams) {
 		$scope
+		$http.get('phones/' + $routeParams.phoneId + '.json').success(function(data) {
+      $scope.phone = data;
+    });
+		
 	}]);

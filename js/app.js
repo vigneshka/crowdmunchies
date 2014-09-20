@@ -11,6 +11,10 @@ cmApp.config(['$routeProvider',
         templateUrl: 'partials/drop-detail.html',
         controller: 'DropDetailCtrl'
       }).
+      when('/join/:dropId', {
+      	templateUrl: 'partials/drop-join.html',
+        controller: 'DropJoinCtrl'
+      }).
       otherwise({
         redirectTo: '/drops'
       });
