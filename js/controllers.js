@@ -1,6 +1,16 @@
-var cmApp = angular.module('cmApp', []);
+var cmControllers = angular.module('cmControllers', []);
 
-cmApp.controller('MunchiesCtrl', ['$scope', 
+cmControllers.controller('DropListCtrl', ['$scope', 
 	function ($scope) {
 
+		$scope.drops = [
+			{'location': 'ECEB',
+			'orders': 9
+			}
+		];
 }]);
+
+cmControllers.controller('DropDetailCtrl', ['$scope', '$routeParams',
+	function($scope, $routeParams) {
+		$scope
+	}]);
